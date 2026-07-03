@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from "react";
+type AspectRatioSelectorProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
-export default function AspectRatioSelector() {
-  const [ratio, setRatio] = useState("Square");
-
-  const ratios = [
-    "Square",
-    "Portrait",
-    "Landscape",
+export default function AspectRatioSelector({
+  value,
+  onChange,
+}: AspectRatioSelectorProps) {
+  const options = [
+    { label: "⬜ Square", value: "square" },
+    { label: "📱 Portrait", value: "portrait" },
+    { label: "🖥 Landscape", value: "landscape" },
   ];
 
   return (
@@ -20,28 +24,21 @@ export default function AspectRatioSelector() {
 
       <div className="flex flex-wrap gap-4">
 
-        {ratios.map((item) => (
+        {options.map((item) => (
           <button
-            key={item}
-            onClick={() => setRatio(item)}
+            key={item.value}
+            onClick={() => onChange(item.value)}
             className={`rounded-xl px-5 py-3 font-semibold transition ${
-              ratio === item
+              value === item.value
                 ? "bg-violet-600"
                 : "bg-zinc-900 hover:bg-zinc-800"
             }`}
           >
-            {item}
+            {item.label}
           </button>
         ))}
 
       </div>
-
-      <p className="mt-4 text-zinc-400">
-        Selected Ratio:{" "}
-        <span className="text-violet-400">
-          {ratio}
-        </span>
-      </p>
 
     </div>
   );

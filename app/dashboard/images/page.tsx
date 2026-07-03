@@ -8,11 +8,16 @@ import PromptSuggestions from "@/components/prompt-suggestions";
 import AspectRatioSelector from "@/components/aspect-ratio-selector";
 import QualitySelector from "@/components/quality-selector";
 import ImagePreviewModal from "@/components/image-preview-modal";
+import GeneratedImageCard from "@/components/generated-image-card";
 
 export default function ImagesPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+const [prompt, setPrompt] = useState("");
+
+  const [aspectRatio, setAspectRatio] = useState("square");
+  const [style, setStyle] = useState("Realistic");
 
   async function generateImage(prompt: string) {
     if (!prompt) return;
@@ -27,6 +32,8 @@ export default function ImagesPage() {
         },
         body: JSON.stringify({
           prompt,
+          aspectRatio,
+          style,
         }),
       });
 
@@ -57,15 +64,25 @@ export default function ImagesPage() {
       </p>
 
       <ImagePromptBox
-        onGenerate={generateImage}
-        loading={loading}
+  prompt={prompt}
+  setPrompt={setPrompt}
+  onGenerate={generateImage}
+  loading={loading}
+/>
+
+      <ImageStyleSelector
+        value={style}
+        onChange={setStyle}
       />
 
-      <ImageStyleSelector />
+      <PromptSuggestions
+  setPrompt={setPrompt}
+/>
 
-      <PromptSuggestions />
-
-      <AspectRatioSelector />
+      <AspectRatioSelector
+        value={aspectRatio}
+        onChange={setAspectRatio}
+      />
 
       <QualitySelector />
 
@@ -80,35 +97,11 @@ export default function ImagesPage() {
           </p>
         </div>
       ) : imageUrl ? (
-        <div className="space-y-5">
-
-          <img
-            src={imageUrl}
-            alt="Generated"
-            onClick={() => setShowPreview(true)}
-            className="w-full max-w-3xl cursor-zoom-in rounded-2xl border border-zinc-700 transition hover:scale-[1.02]"
-          />
-
-          <div className="flex gap-4">
-
-            <a
-              href={imageUrl}
-              download="ai-image.jpg"
-              className="rounded-xl bg-green-600 px-6 py-3 font-semibold hover:bg-green-700 transition"
-            >
-              ⬇ Download
-            </a>
-
-            <button
-              onClick={() => setImageUrl("")}
-              className="rounded-xl bg-zinc-800 px-6 py-3 font-semibold hover:bg-zinc-700 transition"
-            >
-              🗑 Clear
-            </button>
-
-          </div>
-
-        </div>
+        <GeneratedImageCard
+          imageUrl={imageUrl}
+          onPreview={() => setShowPreview(true)}
+          onClear={() => setImageUrl("")}
+        />
       ) : (
         <div className="flex h-96 items-center justify-center rounded-2xl border border-dashed border-zinc-700 bg-zinc-900 text-zinc-500">
           Your generated image will appear here.
@@ -121,7 +114,6 @@ export default function ImagesPage() {
           onClose={() => setShowPreview(false)}
         />
       )}
-
     </main>
   );
 }

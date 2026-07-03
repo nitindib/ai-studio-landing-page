@@ -1,19 +1,45 @@
 "use client";
 
-import { useState } from "react";
+type PromptSuggestionsProps = {
+  setPrompt: (value: string) => void;
+};
 
-export default function PromptSuggestions() {
-  const [selected, setSelected] = useState("🔥 Viral");
-
+export default function PromptSuggestions({
+  setPrompt,
+}: PromptSuggestionsProps) {
   const suggestions = [
-    "🔥 Viral",
-    "🍔 Food",
-    "🚀 Sci-Fi",
-    "🎨 Anime",
-    "🏰 Fantasy",
-    "📸 DSLR",
-    "💎 Luxury",
-    "🎮 Gaming",
+    {
+      label: "🔥 Viral",
+      prompt: "Viral YouTube thumbnail, ",
+    },
+    {
+      label: "🍔 Food",
+      prompt: "Professional food photography, ",
+    },
+    {
+      label: "🚀 Sci-Fi",
+      prompt: "Futuristic sci-fi world, ",
+    },
+    {
+      label: "🎨 Anime",
+      prompt: "Anime style, ",
+    },
+    {
+      label: "🏰 Fantasy",
+      prompt: "Fantasy art, ",
+    },
+    {
+      label: "📸 DSLR",
+      prompt: "Professional DSLR photography, ",
+    },
+    {
+      label: "💎 Luxury",
+      prompt: "Luxury lifestyle, ",
+    },
+    {
+      label: "🎮 Gaming",
+      prompt: "Gaming artwork, ",
+    },
   ];
 
   return (
@@ -25,23 +51,14 @@ export default function PromptSuggestions() {
       <div className="flex flex-wrap gap-3">
         {suggestions.map((item) => (
           <button
-            key={item}
-            onClick={() => setSelected(item)}
-            className={`rounded-full px-5 py-2 transition ${
-              selected === item
-                ? "bg-violet-600 text-white"
-                : "border border-zinc-700 bg-zinc-900 hover:border-violet-500 hover:bg-zinc-800"
-            }`}
+            key={item.label}
+            onClick={() => setPrompt(item.prompt)}
+            className="rounded-full border border-zinc-700 bg-zinc-900 px-5 py-2 transition hover:border-violet-500 hover:bg-zinc-800"
           >
-            {item}
+            {item.label}
           </button>
         ))}
       </div>
-
-      <p className="mt-4 text-zinc-400">
-        Selected Suggestion:{" "}
-        <span className="text-violet-400">{selected}</span>
-      </p>
     </div>
   );
 }

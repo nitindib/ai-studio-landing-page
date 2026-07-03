@@ -1,27 +1,25 @@
 "use client";
 
-import { useState } from "react";
-
 type ImagePromptBoxProps = {
+  prompt: string;
+  setPrompt: (value: string) => void;
   onGenerate: (prompt: string) => void;
   loading: boolean;
 };
 
 export default function ImagePromptBox({
+  prompt,
+  setPrompt,
   onGenerate,
   loading,
 }: ImagePromptBoxProps) {
-  const [prompt, setPrompt] = useState("");
-
   return (
     <div className="mt-8">
-
       <label className="mb-3 block text-lg font-semibold">
         Describe your image
       </label>
 
       <div className="flex gap-4">
-
         <input
           type="text"
           value={prompt}
@@ -41,9 +39,7 @@ export default function ImagePromptBox({
         >
           {loading ? "⏳ Generating..." : "✨ Generate"}
         </button>
-
       </div>
-
     </div>
   );
 }

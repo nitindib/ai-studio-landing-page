@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+type ImageStyleSelectorProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
-export default function ImageStyleSelector() {
-  const [style, setStyle] = useState("Realistic");
-
+export default function ImageStyleSelector({
+  value,
+  onChange,
+}: ImageStyleSelectorProps) {
   const styles = [
     "Realistic",
     "Cinematic",
@@ -24,9 +28,9 @@ export default function ImageStyleSelector() {
         {styles.map((item) => (
           <button
             key={item}
-            onClick={() => setStyle(item)}
+            onClick={() => onChange(item)}
             className={`rounded-xl px-5 py-3 font-semibold transition ${
-              style === item
+              value === item
                 ? "bg-violet-600"
                 : "bg-zinc-900 hover:bg-zinc-800"
             }`}
@@ -38,7 +42,7 @@ export default function ImageStyleSelector() {
 
       <p className="mt-4 text-zinc-400">
         Selected Style:{" "}
-        <span className="text-violet-400">{style}</span>
+        <span className="text-violet-400">{value}</span>
       </p>
     </div>
   );
