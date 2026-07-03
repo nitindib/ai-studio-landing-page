@@ -1,4 +1,18 @@
-export default function ImagePromptBox() {
+"use client";
+
+import { useState } from "react";
+
+type ImagePromptBoxProps = {
+  onGenerate: (prompt: string) => void;
+  loading: boolean;
+};
+
+export default function ImagePromptBox({
+  onGenerate,
+  loading,
+}: ImagePromptBoxProps) {
+  const [prompt, setPrompt] = useState("");
+
   return (
     <div className="mt-8">
 
@@ -10,12 +24,22 @@ export default function ImagePromptBox() {
 
         <input
           type="text"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
           placeholder="Example: A futuristic lion wearing sunglasses in space..."
           className="flex-1 rounded-xl border border-zinc-700 bg-zinc-900 px-5 py-4 outline-none focus:border-violet-500"
         />
 
-        <button className="rounded-xl bg-violet-600 px-8 font-semibold hover:bg-violet-700 transition">
-          ✨ Generate
+        <button
+          onClick={() => onGenerate(prompt)}
+          disabled={loading}
+          className={`rounded-xl px-8 font-semibold transition ${
+            loading
+              ? "cursor-not-allowed bg-zinc-700"
+              : "bg-violet-600 hover:bg-violet-700"
+          }`}
+        >
+          {loading ? "⏳ Generating..." : "✨ Generate"}
         </button>
 
       </div>

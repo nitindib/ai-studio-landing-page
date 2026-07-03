@@ -2,31 +2,26 @@
 
 import { useState } from "react";
 
-export default function ImageStyleSelector() {
-  const [style, setStyle] = useState("Realistic");
+export default function QualitySelector() {
+  const [quality, setQuality] = useState("Fast");
 
-  const styles = [
-    "Realistic",
-    "Cinematic",
-    "Anime",
-    "3D",
-    "Painting",
-    "Photography",
-  ];
+  const options = ["Fast", "HD", "Ultra"];
 
   return (
     <div className="mt-8">
+
       <h2 className="mb-4 text-xl font-bold">
-        🎨 Choose Style
+        ⭐ Quality
       </h2>
 
       <div className="flex flex-wrap gap-4">
-        {styles.map((item) => (
+
+        {options.map((item) => (
           <button
             key={item}
-            onClick={() => setStyle(item)}
+            onClick={() => setQuality(item)}
             className={`rounded-xl px-5 py-3 font-semibold transition ${
-              style === item
+              quality === item
                 ? "bg-violet-600"
                 : "bg-zinc-900 hover:bg-zinc-800"
             }`}
@@ -34,12 +29,13 @@ export default function ImageStyleSelector() {
             {item}
           </button>
         ))}
+
       </div>
 
       <p className="mt-4 text-zinc-400">
-        Selected Style:{" "}
-        <span className="text-violet-400">{style}</span>
+        Selected Quality: <span className="text-violet-400">{quality}</span>
       </p>
+
     </div>
   );
 }

@@ -2,31 +2,30 @@
 
 import { useState } from "react";
 
-export default function ImageStyleSelector() {
-  const [style, setStyle] = useState("Realistic");
+export default function AspectRatioSelector() {
+  const [ratio, setRatio] = useState("Square");
 
-  const styles = [
-    "Realistic",
-    "Cinematic",
-    "Anime",
-    "3D",
-    "Painting",
-    "Photography",
+  const ratios = [
+    "Square",
+    "Portrait",
+    "Landscape",
   ];
 
   return (
     <div className="mt-8">
+
       <h2 className="mb-4 text-xl font-bold">
-        🎨 Choose Style
+        📐 Aspect Ratio
       </h2>
 
       <div className="flex flex-wrap gap-4">
-        {styles.map((item) => (
+
+        {ratios.map((item) => (
           <button
             key={item}
-            onClick={() => setStyle(item)}
+            onClick={() => setRatio(item)}
             className={`rounded-xl px-5 py-3 font-semibold transition ${
-              style === item
+              ratio === item
                 ? "bg-violet-600"
                 : "bg-zinc-900 hover:bg-zinc-800"
             }`}
@@ -34,12 +33,16 @@ export default function ImageStyleSelector() {
             {item}
           </button>
         ))}
+
       </div>
 
       <p className="mt-4 text-zinc-400">
-        Selected Style:{" "}
-        <span className="text-violet-400">{style}</span>
+        Selected Ratio:{" "}
+        <span className="text-violet-400">
+          {ratio}
+        </span>
       </p>
+
     </div>
   );
 }
