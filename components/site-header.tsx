@@ -1,5 +1,6 @@
 "use client"
 
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, Sparkles, X } from "lucide-react"
@@ -41,12 +42,21 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden items-center gap-2 md:flex">
-            <Button variant="ghost" size="sm">
-              Sign in
-            </Button>
-            <Button size="sm" className="glow-primary">
-              Get started
-            </Button>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button variant="ghost" size="sm">
+                  Sign in
+                </Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button size="sm" className="glow-primary">
+                  Get started
+                </Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
           </div>
 
           <button
@@ -73,12 +83,23 @@ export function SiteHeader() {
               </a>
             ))}
             <div className="mt-2 flex flex-col gap-2">
-              <Button variant="ghost" size="sm">
-                Sign in
-              </Button>
-              <Button size="sm" className="glow-primary">
-                Get started
-              </Button>
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <Button variant="ghost" size="sm" className="w-full justify-center">
+                    Sign in
+                  </Button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <Button size="sm" className="glow-primary w-full justify-center">
+                    Get started
+                  </Button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <div className="flex justify-start">
+                  <UserButton afterSignOutUrl="/" />
+                </div>
+              </SignedIn>
             </div>
           </div>
         )}
