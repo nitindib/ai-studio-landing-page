@@ -9,37 +9,42 @@ export default function AspectRatioSelector({
   value,
   onChange,
 }: AspectRatioSelectorProps) {
-  const options = [
-    { label: "⬜ Square", value: "square" },
-    { label: "📱 Portrait", value: "portrait" },
-    { label: "🖥 Landscape", value: "landscape" },
+  const ratios = [
+    {
+      label: "⬜ Square",
+      value: "square",
+    },
+    {
+      label: "📱 Portrait",
+      value: "portrait",
+    },
+    {
+      label: "🖥 Landscape",
+      value: "landscape",
+    },
   ];
 
   return (
-    <div className="mt-8">
-
-      <h2 className="mb-4 text-xl font-bold">
+    <div className="mt-4">
+      <h2 className="mb-3 text-lg font-bold">
         📐 Aspect Ratio
       </h2>
 
-      <div className="flex flex-wrap gap-4">
-
-        {options.map((item) => (
+      <div className="flex flex-wrap gap-3">
+        {ratios.map((item) => (
           <button
             key={item.value}
             onClick={() => onChange(item.value)}
-            className={`rounded-xl px-5 py-3 font-semibold transition ${
+            className={`rounded-full px-5 py-2 font-semibold transition ${
               value === item.value
-                ? "bg-violet-600"
+                ? "bg-violet-600 text-white"
                 : "bg-zinc-900 hover:bg-zinc-800"
             }`}
           >
             {item.label}
           </button>
         ))}
-
       </div>
-
     </div>
   );
 }

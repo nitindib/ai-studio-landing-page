@@ -43,8 +43,8 @@ export default function PromptSuggestions({
   ];
 
   return (
-    <div className="mt-8">
-      <h2 className="mb-4 text-xl font-bold">
+    <div className="mt-4">
+      <h2 className="mb-3 text-lg font-bold">
         💡 Smart Suggestions
       </h2>
 

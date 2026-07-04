@@ -19,19 +19,19 @@ export default function ImageStyleSelector({
   ];
 
   return (
-    <div className="mt-8">
+    <div className="mt-4">
       <h2 className="mb-4 text-xl font-bold">
         🎨 Choose Style
       </h2>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-3">
         {styles.map((item) => (
           <button
             key={item}
             onClick={() => onChange(item)}
-            className={`rounded-xl px-5 py-3 font-semibold transition ${
+            className={`rounded-full px-5 py-2 font-semibold transition ${
               value === item
-                ? "bg-violet-600"
+                ? "bg-violet-600 text-white"
                 : "bg-zinc-900 hover:bg-zinc-800"
             }`}
           >
@@ -39,11 +39,6 @@ export default function ImageStyleSelector({
           </button>
         ))}
       </div>
-
-      <p className="mt-4 text-zinc-400">
-        Selected Style:{" "}
-        <span className="text-violet-400">{value}</span>
-      </p>
     </div>
   );
 }

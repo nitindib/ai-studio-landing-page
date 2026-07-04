@@ -14,12 +14,12 @@ export default function ImagePromptBox({
   loading,
 }: ImagePromptBoxProps) {
   return (
-    <div className="mt-8">
+    <div className="mt-8 rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-lg">
       <label className="mb-3 block text-lg font-semibold">
         Describe your image
       </label>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col gap-4 lg:flex-row">
         <input
           type="text"
           value={prompt}
@@ -31,7 +31,7 @@ export default function ImagePromptBox({
         <button
           onClick={() => onGenerate(prompt)}
           disabled={loading}
-          className={`rounded-xl px-8 font-semibold transition ${
+          className={`rounded-xl px-6 py-4 font-semibold transition ${
             loading
               ? "cursor-not-allowed bg-zinc-700"
               : "bg-violet-600 hover:bg-violet-700"
