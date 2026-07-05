@@ -4,24 +4,35 @@ type GeneratedImageCardProps = {
   imageUrl: string;
   onPreview: () => void;
   onClear: () => void;
+  favorite?: boolean;
+  onFavorite?: () => void;
 };
 
 export default function GeneratedImageCard({
   imageUrl,
   onPreview,
   onClear,
+  favorite,
+  onFavorite,
 }: GeneratedImageCardProps) {
   return (
-    <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-violet-500">
+    <div className="space-y-5">
 
       <img
         src={imageUrl}
         alt="Generated"
         onClick={onPreview}
-        className="w-full cursor-zoom-in rounded-xl"
+        className="w-full cursor-zoom-in rounded-2xl border border-zinc-700 transition hover:scale-[1.02]"
       />
 
-      <div className="mt-4 flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3">
+
+        <button
+          onClick={onFavorite}
+          className="rounded-xl bg-pink-600 px-5 py-3 font-semibold transition hover:bg-pink-700"
+        >
+          {favorite ? "❤️ Favorited" : "🤍 Favorite"}
+        </button>
 
         <a
           href={imageUrl}
